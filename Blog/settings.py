@@ -135,7 +135,7 @@ LOGIN_URL = '/users/login'
 BOOTSTRAP = {
     'include_jquery': True,
     }
-CRIPSY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Heroku settings
 cwd = os.getcwd()
