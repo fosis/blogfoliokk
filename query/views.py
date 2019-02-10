@@ -9,14 +9,17 @@ from .forms import BlogForm, EntryForm, check_form_edit_or_new
 def index(request):
     """Strona główna dla aplikacji query."""
     queryset = Entry.objects.all().order_by('-pub_date')
-    last_entry = queryset[0]
-    bid = last_entry.blog
-    hle = last_entry.headline #headline last entry
-    btle = last_entry.body_text #bodytext last entry
-    sbt = btle.split()
-    indexbt = ' '.join(sbt[:25])    
-    context = {'hle': hle, 'sbt': indexbt, 'bid': bid}
-    return render(request, 'query/index.html', context)
+    if queryset:
+        last_entry = queryset[0]
+        bid = last_entry.blog
+        hle = last_entry.headline #headline last entry
+        btle = last_entry.body_text #bodytext last entry
+        sbt = btle.split()
+        indexbt = ' '.join(sbt[:25])    
+        context = {'hle': hle, 'sbt': indexbt, 'bid': bid}
+        return render(request, 'query/index.html', context)
+    else:
+        return render(request, 'query/index.html')
 
 def blogs(request):
     """Wyświetlanie wszystkich prowadzonych blogów."""
