@@ -1,0 +1,16 @@
+{% extends 'query/base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="bg-light pb-3">
+    <form class="form-signin" method='post' action="{% url 'users:register' %}">
+        {% csrf_token %}
+        <div class="col">
+          {{ form|crispy }}        
+          <button name='submit'>Rejestruj</button>
+        </div>
+        <input type='hidden' name='next' value="{% url 'query:index' %}" />
+    </form>
+</div>
+{% endblock content %}

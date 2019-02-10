@@ -1,0 +1,41 @@
+{% extends 'query/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="bg-light pt-4 pb-4">
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-8 blog-main">
+      <h2 class="pb-3 mb-4 font-italic border-bottom">{{ blog }}</h2>
+      {% if user.is_authenticated and user.id == blog.owner.id %} 
+        <a href="{% url 'query:new_entry' blog.id %}">Dodaj nowy wpis</a>
+        <hr>          
+      {% endif %}
+        {% for headline in headlines %}
+        <div class="blog-post">
+          {% if headline.headline|length <= 104 %}
+            <h3 class="blog-post-title">{{ headline }}</h3>
+          {% else %}
+            <h4 class="blog-post-title">{{ headline }}</h4>
+          {% endif %}
+          {% if headline.pub_date != headline.mod_date %}
+          <p class="blog-post-meta font-weight-light">{{ headline.pub_date|date:'d M Y H:i' }} || Data modyfikacji wpisu: {{headline.mod_date|date:'d M Y H:i' }}</p>
+          {% else %}
+          <p class="blog-post-meta font-weight-light">{{ headline.pub_date|date:'d M Y H:i' }}</p>
+          {% endif %}
+          <hr>
+        <div class="col">
+          <p class="text-justify">{{ headline.body_text }}</p>
+          {% if user.is_authenticated and user.id == blog.owner.id %}
+            <small><a href="{% url 'query:edit_entry' entry_id=headline.id %}">Edytuj powyższy wpis</a></small>
+            <hr>
+          {% endif %}
+        </div>
+        {% empty %}
+        <h4 class="blog-post-title">Nie został dodany jeszcze żaden wpis na blogu.</h4>
+        {% endfor %}
+    </div>
+  </div>
+</main>
+</div>   
+{% endblock content %}

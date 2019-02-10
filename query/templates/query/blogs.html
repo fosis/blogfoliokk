@@ -1,0 +1,33 @@
+{% extends 'query/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}    
+      <div class="row-justify-content-md-center">
+          <div class="col-md-auto text-center text-dark bg-light pb-2">
+              <h1 class="display-4">Lista blogów:</h1>
+          </div>
+      </div>
+        
+        <div class="card-deck bg-light mr-0 pr-4">
+          {% for blog in blogs %}
+            <div class="col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="{% url 'query:blog' blog.id %}">{{ blog }}<hr></a>
+                </h5>
+                <small class="card-text font-italic">{{ blog.tagline }}</small>
+              </div>
+            </div>
+            </div>
+          {% empty %}
+            <li> Nie został dodany jeszcze żaden blog.</li>
+          {% endfor %} 
+        </div>
+        
+        <div class="row-justify-content-md-center pt-3 pb-3 bg-light">
+            <div class="col-md-auto text-center text-dark bg-light">            
+            <a href="{% url 'query:new_blog' %}" class="btn btn-info active" role="button" aria-pressed="true">Dodaj nowego bloga</a>
+            </div>
+        </div>    
+{% endblock content %}
