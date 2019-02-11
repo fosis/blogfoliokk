@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -25,8 +25,6 @@ def blogs(request):
     """Wyświetlanie wszystkich prowadzonych blogów."""
     blogs = Blog.objects.order_by('name')
     queryset = Entry.objects.all()
-    e = [e.pub_date for e in queryset]
-    #context = {'blogs': blogs, 'e': e}
     context = {'blogs': blogs}
     return render(request, 'query/blogs.html', context)
 
@@ -39,7 +37,7 @@ def my_blogs(request):
 
 def blog(request, blog_id):
     """wyświetlenie wpisów wybranego bloga."""
-    blog = Blog.objects.get(id=blog_id)
+    blog = get_object_or_404(Blog, id=blog_id)
     headlines = blog.entry_set.order_by('-pub_date')
     context = {'blog': blog, 'headlines': headlines}
     return render(request, 'query/blog.html', context)
@@ -65,7 +63,7 @@ def new_blog(request):
 @login_required 
 def new_entry(request, blog_id):
     """Dodanie nowego wpisu na blogu."""
-    blog = Blog.objects.get(id=blog_id)
+    blog = get_object_or_404(Blog, id=blog_id)
     check_blog_owner(blog, request)    
     
     if request.method != 'POST':
@@ -88,7 +86,7 @@ def new_entry(request, blog_id):
 @login_required
 def edit_entry(request, entry_id):
     """Edycja istniejącego wpisu."""
-    entry = Entry.objects.get(id=entry_id)
+    entry = get_object_or_404(Entry, id=entry_id)
     blog = entry.blog
     check_blog_owner(blog, request)    
     
