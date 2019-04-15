@@ -5,7 +5,7 @@ class Blog(models.Model):
     name = models.CharField(max_length=100)
     tagline = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    
+        
     def __str__(self):
         return self.name
         
@@ -32,6 +32,6 @@ class Entry(models.Model):
 
     class Meta:
         verbose_name_plural = 'Entries'
-    
+        
     def __str__(self):
         return self.headline

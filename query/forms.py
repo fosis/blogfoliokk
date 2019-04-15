@@ -22,7 +22,7 @@ class BlogForm(forms.ModelForm):
                     'rows': 2,
                     }),
                 }
-    
+        
     def __init__(self, *args, **kwargs):
         super(BlogForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -52,7 +52,7 @@ class EntryForm(forms.ModelForm):
         labels = {'headline': 'Tytuł wpisu', 'body_text': 'Tekst wpisu'}
         widgets = {'body_text': forms.Textarea(attrs={'cols': 80, 'class': 'form-control'}),
             'headline': forms.TextInput(attrs={'class': 'form-control', 'rows': 2,})}
-        
+                
     def __init__(self, *args, **kwargs):
         super(EntryForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -69,6 +69,7 @@ class EntryForm(forms.ModelForm):
                 css_class='form-group col-md-10 mb-1'),
             css_class='pt-2'),
             )
+
 
 def check_form_edit_or_new(form_type, form):
     """Checks if displayed form is for new entry or edited one."""
