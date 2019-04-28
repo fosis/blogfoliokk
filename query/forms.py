@@ -9,7 +9,7 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ['name', 'tagline']
-        labels = {'name': 'Blog name', 'tagline': 'Tematic tags'}
+        labels = {'name': 'Blog name', 'tagline': 'Thematic tags'}
         widgets ={
             'tagline': forms.Textarea(
                 attrs={
