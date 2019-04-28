@@ -86,3 +86,19 @@ def check_form_edit_or_new(form_type, form):
                        'body_text',
                        css_class='form-group col-md-10 mb-0')
         return new
+
+def check_form_blog_edit_or_new(form_type, form):
+    """Checks if displayed form is for new entry or edited one."""
+    if form_type != 'new':        
+        edit = Fieldset('Change blog data:', 
+                        'name',
+                        'tagline',
+                        css_class='form-group col-md-10 mb-0')
+        btn = Submit('submit', 'Save changes', css_class='button white')
+        return (edit, btn)
+    else:        
+        new = Fieldset('Fill fields below to add new blog:', 
+                       'name',
+                       'tagline',
+                       css_class='form-group col-md-10 mb-0')
+        return new
