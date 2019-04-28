@@ -50,7 +50,7 @@ def new_blog(request):
         #No data posted, show empty form.
         form = BlogForm()
     else:
-        #Data posted by POST request, process them.
+        #Data posted by POST request, process it.
         form = BlogForm(request.POST)
         if form.is_valid():
             new_blog = form.save(commit=False)
@@ -72,7 +72,7 @@ def new_entry(request, blog_id):
         form = EntryForm()
         form.helper.layout[0][0] = check_form_edit_or_new('new', form)
     else:
-        #Data posted by POST request, process them.
+        #Data posted by POST request, process it.
         form = EntryForm(data=request.POST)
 
         if form.is_valid():
@@ -89,8 +89,7 @@ def edit_entry(request, entry_id):
     """Blog entry edition."""
     entry = get_object_or_404(Entry, id=entry_id)
     blog = entry.blog
-    check_blog_owner(blog, request)    
-    
+    check_blog_owner(blog, request
     
     if request.method != 'POST':
         #Initial request, filling the form with actual content of entry data.
@@ -136,4 +135,3 @@ def check_blog_owner(blog, request):
     """Checks if blog is registered to user."""
     if blog.owner != request.user:
         raise Http404
-

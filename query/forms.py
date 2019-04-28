@@ -9,7 +9,7 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ['name', 'tagline']
-        labels = {'name': 'Nazwa bloga', 'tagline': 'Tagi tematyczne'}
+        labels = {'name': 'Blog name', 'tagline': 'Tematic tags'}
         widgets ={
             'tagline': forms.Textarea(
                 attrs={
@@ -33,14 +33,14 @@ class BlogForm(forms.ModelForm):
         self.helper.layout = Layout(            
         Column(
             Fieldset(
-                'Uzupełnij poniższe pola w celu dodania nowego bloga:',
+                'Fill fields below to add new blog:',
                 'name',
                 'tagline',
             css_class='form-group col-md-10 mb-0'),
         css_class='pt-1'),        
         Column(
             FormActions(
-                Submit('submit', 'Dodaj nowy blog', css_class='button white'),
+                Submit('submit', 'Add new blog', css_class='button white'),
             css_class='form-group col-md-10 mb-1'),
         css_class='pt-2'),
         )
@@ -49,7 +49,7 @@ class EntryForm(forms.ModelForm):
     class Meta:
         model = Entry
         fields = ['headline', 'body_text']
-        labels = {'headline': 'Tytuł wpisu', 'body_text': 'Tekst wpisu'}
+        labels = {'headline': 'Entry title', 'body_text': 'Entry text'}
         widgets = {'body_text': forms.Textarea(attrs={'cols': 80, 'class': 'form-control'}),
             'headline': forms.TextInput(attrs={'class': 'form-control', 'rows': 2,})}
                 
@@ -65,30 +65,29 @@ class EntryForm(forms.ModelForm):
                     css_class='pt-1'),        
             Column(
                 FormActions(
-                    Submit('submit', 'Dodaj nowy wpis', css_class='button white'),
+                    Submit('submit', 'Add new entry', css_class='button white'),
                 css_class='form-group col-md-10 mb-1'),
             css_class='pt-2'),
             )
 
-
 def check_form_edit_or_new(form_type, form):
     """Checks if displayed form is for new entry or edited one."""
     if form_type != 'new':        
-        edit = Fieldset('Zmień poniższy wpis:', 
+        edit = Fieldset('Change below entry:', 
                         'headline',
                         'body_text',
                         css_class='form-group col-md-10 mb-0')
-        btn = Submit('submit', 'Zapisz zmiany', css_class='button white')
+        btn = Submit('submit', 'Save changes', css_class='button white')
         return (edit, btn)
     else:        
-        new = Fieldset('Uzupełnij poniższe pola w celu dodania nowego nowego wpisu:', 
+        new = Fieldset('Fill fields below to add new entry:', 
                        'headline',
                        'body_text',
                        css_class='form-group col-md-10 mb-0')
         return new
 
 def check_form_blog_edit_or_new(form_type, form):
-    """Checks if displayed form is for new entry or edited one."""
+    """Checks if displayed form is for new blog or edited one."""
     if form_type != 'new':        
         edit = Fieldset('Change blog data:', 
                         'name',
