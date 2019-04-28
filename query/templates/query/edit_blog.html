@@ -1,0 +1,17 @@
+{% extends 'query/base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="bg-light pb-3">
+    <div class="row-md pt-3">
+      <div class="col-md-5">
+        <h4>
+        <a href="{% url 'query:blog' blog.id %}">{{ blog }}</a>
+        </h4>
+        <hr>
+      </div>
+    </div>
+    {% crispy form %}
+</div> 
+{% endblock content %}

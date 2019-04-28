@@ -107,6 +107,26 @@ def edit_entry(request, entry_id):
     context = {'entry': entry, 'blog': blog, 'form': form}
     return render(request, 'query/edit_entry.html', context)
 
+@login_required
+def edit_blog(request, blog_id):
+    """Edition of blog informations"""
+    blog = get_object_or_404(Blog, id=blog_id)
+    check_blog_owner(blog, request)
+    
+    if request.method != 'POST':
+        #Initial request, filling the form with actual content of blog data.
+        form = BlogForm(instance=blog)
+    else:
+        #POST request, data has to be processed.
+        form = BlogForm(instance=blog, data=request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('query:blog', args=[blog.id]))
+            
+    context = {'blog': blog, 'form': form}
+    return render(request, 'query/edit_blog.html', context)
+
 def check_blog_owner(blog, request):
     """Sprawdza czy blog należy do twórcy."""
     if blog.owner != request.user:

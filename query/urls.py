@@ -19,6 +19,9 @@ urlpatterns = [
     #Strona przeznaczona do dodawania nowego bloga.
     path(r'new_blog/', views.new_blog, name='new_blog'),
     
+    #Edit blog site.
+    path(r'edit_blog/<blog_id>\d+/', views.edit_blog, name='edit_blog'),
+    
     #Strona przeznaczona do dodawania nowego wpisu na blogu.
     path(r'new_entry/<blog_id>\d+/', views.new_entry, name='new_entry'),
     
