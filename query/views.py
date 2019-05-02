@@ -89,7 +89,7 @@ def edit_entry(request, entry_id):
     """Blog entry edition."""
     entry = get_object_or_404(Entry, id=entry_id)
     blog = entry.blog
-    check_blog_owner(blog, request
+    check_blog_owner(blog, request)
     
     if request.method != 'POST':
         #Initial request, filling the form with actual content of entry data.
