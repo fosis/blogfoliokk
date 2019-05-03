@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Blog, Entry
-from .forms import BlogForm, EntryForm, check_form_edit_or_new
+from .models import Blog, Entry, Author
+from .forms import BlogForm, EntryForm, AuthorForm, check_form_edit_or_new
 from .forms import check_form_blog_edit_or_new
 
 def index(request):
@@ -35,6 +35,26 @@ def my_blogs(request):
     my_blogs = Blog.objects.filter(owner=request.user).order_by('name')
     context = {'my_blogs': my_blogs}
     return render(request, 'query/my_blogs.html', context)
+
+@login_required
+def my_info(request):
+    """View logged user information."""
+    authors = Author.objects.filter(owner=request.user).order_by('nickname')
+    
+    if request.method != 'POST':
+        #No data posted, show empty form.
+        form = AuthorForm()
+    else:
+        #Data posted by POST request, process it.
+        form = AuthorForm(request.POST)
+        if form.is_valid():
+            new_author = form.save(commit=False)
+            new_author.owner = request.user
+            new_author.save()
+            return HttpResponseRedirect(reverse('query:my_info'))
+            
+    context = {'authors': authors, 'form': form}
+    return render(request, 'query/my_info.html', context)
 
 def blog(request, blog_id):
     """View entries of chosen blog."""

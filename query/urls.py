@@ -29,5 +29,8 @@ urlpatterns = [
     path(r'edit_entry/<entry_id>\d+/', views.edit_entry, name='edit_entry'),
     
     #Page to view blogs created by logged user.
-    path('my_blogs/', views.my_blogs, name='my_blogs'),
+    path(r'my_blogs/', views.my_blogs, name='my_blogs'),
+    
+    #Page to set nicknames.
+    path(r'my_info/', views.my_info, name='my_info'),
 ]

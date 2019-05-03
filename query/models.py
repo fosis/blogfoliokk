@@ -2,22 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Blog(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, default='')
     tagline = models.TextField()
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)    
         
     def __str__(self):
         return self.name
-        
-class ThemeBlog(Blog):
-    theme = models.CharField(max_length=200)
         
 class Author(models.Model):
-    name = models.CharField(max_length=200)
+    blogs = models.ManyToManyField(Blog)
+    nickname = models.CharField(max_length=50, default='')
     email = models.EmailField()
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.name
+        return self.nickname
 
 class Entry(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)

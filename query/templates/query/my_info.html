@@ -1,0 +1,31 @@
+{% extends 'query/base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="row-justify-content-md-center">
+    <div class="col-md-auto text-center text-dark bg-light pb-2">
+      <h1 class="display-4">Lista moich psedonimów:</h1>
+    </div>
+  </div>        
+  <div class="card-deck bg-light mr-0 pr-4">
+    {% for author in authors %}
+      <div class="col-md-3">
+        <hr>{{ author }}
+      </div>
+    {% empty %}
+      <li> Nie dodałeś/aś jeszcze żadnego pseudonimu.</li>
+    {% endfor %}
+   
+  </div>
+  <div class="bg-light pb-3">
+    {% crispy form %}
+  </div> 
+<!--
+  <div class="row-justify-content-md-center pt-3 pb-3 bg-light">
+    <div class="col-md-auto text-center text-dark bg-light">            
+      <a href="{% url 'query:new_blog' %}" class="btn btn-info active" role="button" aria-pressed="true">Dodaj nowego bloga</a>
+    </div>
+  </div> 
+-->
+{% endblock content %}

@@ -3,7 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Column, Row
 
-from .models import Blog, Entry
+from .models import Blog, Entry, Author
 
 class BlogForm(forms.ModelForm):
     class Meta:
@@ -60,7 +60,7 @@ class EntryForm(forms.ModelForm):
         self.helper.form_class = 'blueForms'
         self.helper.form_method = 'post'
         
-        self.helper.layout = Layout(            
+        self.helper.layout = Layout(
             Column(Fieldset(''),
                     css_class='pt-1'),        
             Column(
@@ -69,6 +69,36 @@ class EntryForm(forms.ModelForm):
                 css_class='form-group col-md-10 mb-1'),
             css_class='pt-2'),
             )
+
+class AuthorForm(forms.ModelForm):
+    class Meta:
+        model = Author
+        fields = ['nickname', 'email']
+        labels = {'nickname': 'Nickname', 'email': 'Contact information - email',}
+        widgets = {'nickname': forms.Textarea(attrs={'cols': 50, 'rows': 1, 'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'rows': 1,})}
+            
+    def __init__(self, *args, **kwargs):
+        super(AuthorForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-AuthorForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        
+        self.helper.layout = Layout(
+            Column(Fieldset(
+                'Fill fields below to add new artistic nickname and contact information:',
+                'nickname',
+                'email',
+                ),
+                css_class='form-group col-md-10 mb-0'),
+            Column(
+                FormActions(
+                    Submit('submit', 'Add new author', css_class='button white'),
+                css_class='form-group col-md-10 mb-1'),
+            css_class='pt-2'),
+            )
+                
 
 def check_form_edit_or_new(form_type, form):
     """Checks if displayed form is for new entry or edited one."""
