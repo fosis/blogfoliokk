@@ -3,24 +3,36 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<div class="bg-light">
   <div class="row-justify-content-md-center">
-    <div class="col-md-auto text-center text-dark bg-light pb-2">
+    <div class="col-md-auto text-center text-dark pb-2">
       <h1 class="display-4">Lista moich psedonimów:</h1>
     </div>
   </div>        
-  <div class="card-deck bg-light mr-0 pr-4">
+  <div class="col-md-auto ">
+  <ul class="list-group pb-3 mr-1">
     {% for author in authors %}
-      <div class="col-md-3">
-        <hr>{{ author }}
-      </div>
+      <li class="list-group-item col-md-10 ">
+        <div class="d-md-flex flex-row justify-content-between mr-1">
+          <div class="p-1">Nickname: {{ author }}</div>
+          <div class="p-1">Email: {{ author.email }}</div>
+          <div class="p-1">Number of blogs:
+            <span class="badge badge-primary badge-pill">1</span>
+          </div>
+        </div>
+      </li>
     {% empty %}
-      <li> Nie dodałeś/aś jeszcze żadnego pseudonimu.</li>
+      <li class="list-group-item"> Nie dodałeś/aś jeszcze żadnego pseudonimu.</li>
     {% endfor %}
    
+  </ul>
   </div>
-  <div class="bg-light pb-3">
+  <div class="col-md-10 pb-3 mt-3 ">
+    
     {% crispy form %}
+    
   </div> 
+</div>
 <!--
   <div class="row-justify-content-md-center pt-3 pb-3 bg-light">
     <div class="col-md-auto text-center text-dark bg-light">            

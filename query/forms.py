@@ -91,11 +91,11 @@ class AuthorForm(forms.ModelForm):
                 'nickname',
                 'email',
                 ),
-                css_class='form-group col-md-10 mb-0'),
+                css_class='form-group mb-0'),
             Column(
                 FormActions(
                     Submit('submit', 'Add new author', css_class='button white'),
-                css_class='form-group col-md-10 mb-1'),
+                css_class='form-group mb-1'),
             css_class='pt-2'),
             )
                 
