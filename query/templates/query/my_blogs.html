@@ -13,13 +13,17 @@
         <div class="card h-100">
           <div class="card-body pb-2">
             <h5 class="card-title">
-              <a href="{% url 'query:blog' blog.id %}">{{ blog }}<hr></a>
+              <a href="{% url 'query:blog' blog.id %}">{{ blog }}</a>
             </h5>
+            <hr>
+            <h6 class="card-title">Author: {{ blog.author }}</h6>
+            <hr>
             <small class="card-text font-italic">{{ blog.tagline }}</small>
-          </div>
+            <hr>
+          </div>          
           <div class="card-body pb-1 d-flex align-content-end flex-wrap">            
-            <small>    
-                <a href="{% url 'query:edit_blog' blog.id %}" class="card-link text-info mt-auto">Edit blog data</a>
+            <small>   
+                <a href="{% url 'query:edit_blog' blog.id %}" class="card-link text-info">Edit blog data</a>
             </small>            
           </div>          
         </div>

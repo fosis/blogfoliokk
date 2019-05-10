@@ -17,6 +17,8 @@ class Author(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
+        if self.nickname==None:
+            return "Error - nickname is NULL"        
         return self.nickname
 
 class Entry(models.Model):
