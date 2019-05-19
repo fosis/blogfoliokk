@@ -17,7 +17,7 @@
           <div class="p-1">Nickname: {{ author }}</div>
           <div class="p-1">Email: {{ author.email }}</div>
           <div class="p-1">Number of blogs:
-            <span class="badge badge-primary badge-pill">1</span>
+            <span class="badge badge-primary badge-pill">{{ author.blogs.count }}</span>
           </div>
         </div>
       </li>

@@ -32,3 +32,6 @@ for b in blog:
                 blogname = bg.id
                 ba.blogs.add(blogname)
                 ba.save()
+
+
+>>> author = Author.objects.filter(owner__in=User.objects.filter(username='admin'))

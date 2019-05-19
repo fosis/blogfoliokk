@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.db.models import OuterRef, Subquery
 
 from .models import Blog, Entry, Author
 from .forms import BlogForm, EntryForm, AuthorForm, check_form_edit_or_new
@@ -53,7 +54,7 @@ def my_info(request):
             new_author.save()
             return HttpResponseRedirect(reverse('query:my_info'))
             
-    context = {'authors': authors, 'form': form}
+    context = {'authors': authors, 'form': form,}
     return render(request, 'query/my_info.html', context)
 
 def blog(request, blog_id):
