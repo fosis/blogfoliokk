@@ -16,6 +16,9 @@
                 <h5 class="card-title">
                   <a href="{% url 'query:blog' blog.id %}">{{ blog }}<hr></a>
                 </h5>
+                <hr>
+                <h6 class="card-title">Author: {{ blog.author }}</h6>
+                <hr>
                 <small class="card-text font-italic">{{ blog.tagline }}</small>
               </div>
             </div>
